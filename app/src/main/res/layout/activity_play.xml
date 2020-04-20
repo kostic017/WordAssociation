@@ -6,13 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".PlayActivity">
 
-
     <Button
         android:id="@+id/button_a1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="96dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="A1"
         app:layout_constraintBottom_toTopOf="@+id/button_a2"
         app:layout_constraintEnd_toStartOf="@+id/button_b1"
@@ -24,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="64dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="A2"
         app:layout_constraintBottom_toTopOf="@+id/button_a3"
         app:layout_constraintEnd_toStartOf="@+id/button_b2"
@@ -49,9 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="A4"
-        app:layout_constraintBottom_toTopOf="@+id/textView_solution_a"
+        app:layout_constraintBottom_toTopOf="@+id/solution_a"
         app:layout_constraintEnd_toStartOf="@+id/button_b4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="B1"
         app:layout_constraintBottom_toTopOf="@+id/button_b2"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="B2"
         app:layout_constraintBottom_toTopOf="@+id/button_b3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +87,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="B3"
         app:layout_constraintBottom_toTopOf="@+id/button_b4"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,9 +100,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:text="B4"
-        app:layout_constraintBottom_toTopOf="@+id/textView_solution_b"
+        app:layout_constraintBottom_toTopOf="@+id/solution_b"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_a4"
@@ -113,7 +112,7 @@
         android:id="@+id/button_c1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="96dp"
         android:text="C1"
         app:layout_constraintEnd_toStartOf="@+id/button_d1"
@@ -126,7 +125,7 @@
         android:id="@+id/button_c2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="64dp"
         android:text="C2"
         app:layout_constraintEnd_toStartOf="@+id/button_d2"
@@ -139,7 +138,7 @@
         android:id="@+id/button_c3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:text="C3"
         app:layout_constraintEnd_toStartOf="@+id/button_d3"
@@ -152,13 +151,13 @@
         android:id="@+id/button_c4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="C4"
         app:layout_constraintEnd_toStartOf="@+id/button_d4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_solution_c"
+        app:layout_constraintTop_toBottomOf="@+id/solution_c"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -166,7 +165,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="96dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="D1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -179,7 +178,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="D2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -192,7 +191,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="D3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -205,66 +204,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="16dp"
         android:text="D4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/button_c4"
-        app:layout_constraintTop_toBottomOf="@+id/textView_solution_d"
+        app:layout_constraintTop_toBottomOf="@+id/solution_d"
         tools:ignore="HardcodedText" />
 
-    <TextView
-        android:id="@+id/textView_solution_a"
+    <Button
+        android:id="@+id/solution"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_solution"
-        app:layout_constraintEnd_toStartOf="@+id/textView_solution_b"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="A" />
-
-    <TextView
-        android:id="@+id/textView_solution_b"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_solution"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView_solution_a"
-        tools:text="B" />
-
-    <TextView
-        android:id="@+id/textView_solution_c"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView_solution_d"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_solution"
-        tools:text="C" />
-
-    <TextView
-        android:id="@+id/textView_solution_d"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView_solution_c"
-        app:layout_constraintTop_toBottomOf="@+id/textView_solution"
-        tools:text="D" />
-
-    <TextView
-        android:id="@+id/textView_solution"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:text="\???"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Solution" />
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/solution_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="\???"
+        app:layout_constraintEnd_toStartOf="@+id/solution_d"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/solution"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/solution_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="\???"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/solution_c"
+        app:layout_constraintTop_toBottomOf="@+id/solution"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/solution_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="\???"
+        app:layout_constraintBottom_toTopOf="@+id/solution"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/solution_a"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/solution_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="\???"
+        app:layout_constraintBottom_toTopOf="@+id/solution"
+        app:layout_constraintEnd_toStartOf="@+id/solution_b"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

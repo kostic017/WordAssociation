@@ -1,3 +1,5 @@
+*.mwb.bak
+
 *.iml
 .gradle
 /local.properties

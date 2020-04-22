@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Asocijacije</string>
+    <string name="easy">Lako</string>
+    <string name="medium">Srednje</string>
+    <string name="hard">Teško</string>
+</resources>

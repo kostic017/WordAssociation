@@ -13,7 +13,7 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AssociationCell">
+    <style name="ButtonStyle">
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
         <item name="android:paddingEnd">5dp</item>
@@ -24,7 +24,7 @@
         <item name="android:textColor">@drawable/button_text_color</item>
     </style>
 
-    <style name="AssociationCell.Portrait">
+    <style name="ButtonStyle.CellPortrait">
         <item name="layout_constraintWidth_percent">0.33</item>
         <item name="layout_constraintWidth_default">percent</item>
     </style>

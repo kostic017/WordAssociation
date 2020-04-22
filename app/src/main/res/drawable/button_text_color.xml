@@ -7,6 +7,6 @@
         android:state_enabled="false"
         android:color="@color/colorButtonForegroundPressed" />
     <item
-        android:color="@color/colorButtonForeground" />
+        android:color="@color/colorTextColor" />
 </selector>
 

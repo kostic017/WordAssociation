@@ -2,9 +2,9 @@
 <resources>
 
     <color name="colorMainBackground">#304a72</color>
+    <color name="colorTextColor">#c2c3d2</color>
 
     <color name="colorButtonStroke">#c2c3d2</color>
-    <color name="colorButtonForeground">#c2c3d2</color>
     <color name="colorButtonBackground">@android:color/transparent</color>
     <color name="colorButtonForegroundPressed">#2b2a2a</color>
     <color name="colorButtonBackgroundPressed">#c2c3d2</color>

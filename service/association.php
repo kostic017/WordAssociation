@@ -1,4 +1,6 @@
 <?php
+require_once "model/association.php";
+
 define("DB_HOST", "localhost");
 define("DB_NAME", "associations");
 define("DB_USER", "root");
@@ -25,15 +27,15 @@ if (!isset($_GET["language"])) {
     die("Parameter language is missing.");
 }
 
-$stmt = prepare($mysqli,
+$readAssocStmt = prepare($mysqli,
     "SELECT assoc.* "
     . "FROM association assoc "
     . "WHERE language_code=? "
 );
 
-$stmt->bind_param("s", $_GET["language"]);
-$stmt->execute();
-$result = $stmt->get_result();
+$readAssocStmt->bind_param("s", $_GET["language"]);
+$readAssocStmt->execute();
+$associationsResult = $readAssocStmt->get_result();
 
 $associations = [
     "EASY" => [],
@@ -41,48 +43,73 @@ $associations = [
     "HARD" => []
 ];
 
-while ($association = $result->fetch_object()) {
-    $stmt1 = prepare($mysqli,
+while ($associationRow = $associationsResult->fetch_object()) {
+
+    $association = new Association();
+    $association->id = $associationRow->id;
+    $association->language = $associationRow->language_code;
+    $association->difficulty = $associationRow->difficulty_value;
+    $association->a1 = $associationRow->a1;
+    $association->a2 = $associationRow->a2;
+    $association->a3 = $associationRow->a3;
+    $association->a4 = $associationRow->a4;
+    $association->solutionsA = [$associationRow->solution_a];
+    $association->b1 = $associationRow->b1;
+    $association->b2 = $associationRow->b2;
+    $association->b3 = $associationRow->b3;
+    $association->b4 = $associationRow->b4;
+    $association->solutionsB = [$associationRow->solution_b];
+    $association->c1 = $associationRow->c1;
+    $association->c2 = $associationRow->c2;
+    $association->c3 = $associationRow->c3;
+    $association->c4 = $associationRow->c4;
+    $association->solutionsC = [$associationRow->solution_c];
+    $association->d1 = $associationRow->d1;
+    $association->d2 = $associationRow->d2;
+    $association->d3 = $associationRow->d3;
+    $association->d4 = $associationRow->d4;
+    $association->solutionsD = [$associationRow->solution_d];
+    $association->solutions = [$associationRow->solution];
+
+    $readAltSolStmt = prepare($mysqli,
         "SELECT alt.symbol_value, alt.alternative "
         . "FROM alternative_solution alt "
         . "WHERE alt.association_id=? "
     );
 
-    $association->solution_a = [$association->solution_a];
-    $association->solution_b = [$association->solution_b];
-    $association->solution_c = [$association->solution_c];
-    $association->solution_d = [$association->solution_d];
-    $association->solution = [$association->solution];
+    $readAltSolStmt->bind_param("i", $association->id);
+    $readAltSolStmt->execute();
+    $altSolutionsResult = $readAltSolStmt->get_result();
 
-    $stmt1->bind_param("i", $association->id);
-    $stmt1->execute();
-    $result1 = $stmt1->get_result();
-
-    while ($alt_solution = $result1->fetch_object()) {
-        switch ($alt_solution->symbol_value) {
+    while ($altSolutionRow = $altSolutionsResult->fetch_object()) {
+        switch ($altSolutionRow->symbol_value) {
             case "A":
-                $association->solution_a[] = $alt_solution->alternative;
+                $association->solutionsA[] = $altSolutionRow->alternative;
                 break;
             case "B":
-                $association->solution_b[] = $alt_solution->alternative;
+                $association->solutionsB[] = $altSolutionRow->alternative;
                 break;
             case "C":
-                $association->solution_c[] = $alt_solution->alternative;
+                $association->solutionsC[] = $altSolutionRow->alternative;
                 break;
             case "D":
-                $association->solution_d[] = $alt_solution->alternative;
+                $association->solutionsD[] = $altSolutionRow->alternative;
                 break;
             case "F":
-                $association->solution[] = $alt_solution->alternative;
+                $association->solutions[] = $altSolutionRow->alternative;
                 break;
         }
     }
 
-    $associations[$association->difficulty_value][] = $association;
+    $altSolutionsResult->close();
+    $readAltSolStmt->close();
+
+    $associations[$association->difficulty][] = $association;
+
 }
 
-$result->close();
-$stmt->close();
+$associationsResult->close();
+$readAssocStmt->close();
 $mysqli->close();
 
 http_response_code(200);

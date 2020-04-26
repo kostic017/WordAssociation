@@ -2,9 +2,9 @@ package vr.kostic017.wordassociation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,6 +15,7 @@ import vr.kostic017.wordassociation.model.Language;
 
 public class MenuActivity extends AppCompatActivity {
 
+    private boolean isDifficultySelected;
     private ActivityMenuBinding activityMenuBinding;
 
     @Override
@@ -31,6 +32,7 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        isDifficultySelected = false;
         Language language = Language.fromCode(Locale.getDefault().getLanguage());
         if (language != null) {
             activityMenuBinding.spinnerLanguage.setSelection(language.ordinal());
@@ -38,11 +40,14 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void startGame(View view) {
-        Language language = (Language) activityMenuBinding.spinnerLanguage.getSelectedItem();
-        Intent intent = new Intent(this, PlayActivity.class);
-        intent.putExtra(PlayActivity.EXTRA_LANGUAGE, language.getCode());
-        intent.putExtra(PlayActivity.EXTRA_DIFFICULTY, (String) view.getTag());
-        startActivity(intent);
+        if (!isDifficultySelected) {
+            isDifficultySelected = true;
+            Language language = (Language) activityMenuBinding.spinnerLanguage.getSelectedItem();
+            Intent intent = new Intent(this, PlayActivity.class);
+            intent.putExtra(PlayActivity.EXTRA_LANGUAGE, language.getCode());
+            intent.putExtra(PlayActivity.EXTRA_DIFFICULTY, (String) view.getTag());
+            startActivity(intent);
+        }
     }
 
 }

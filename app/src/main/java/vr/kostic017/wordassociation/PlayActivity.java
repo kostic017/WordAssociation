@@ -15,6 +15,6 @@ public class PlayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
-        Toast.makeText(this, getIntent().getStringExtra(EXTRA_DIFFICULTY) + " " + getIntent().getStringExtra(EXTRA_LANGUAGE), Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getIntent().getStringExtra(EXTRA_DIFFICULTY) + " " + getIntent().getStringExtra(EXTRA_LANGUAGE), Toast.LENGTH_SHORT).show();
     }
 }

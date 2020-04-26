@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorMainBackground"
-    tools:context=".MainActivity">
+    tools:context=".MenuActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,12 +34,11 @@
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:text="@string/easy"
+            android:layout_marginEnd="16dp"
             android:onClick="startGame"
             android:tag="EASY"
+            android:text="@string/easy"
             app:layout_constraintEnd_toStartOf="@+id/button_medium"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/button_medium" />
 
@@ -47,27 +47,43 @@
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:text="@string/medium"
+            android:layout_marginTop="16dp"
             android:onClick="startGame"
             android:tag="MEDIUM"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/application_title" />
+            android:text="@string/medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/button_hard"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/button_easy"
+            app:layout_constraintTop_toBottomOf="@+id/application_title"
+            app:layout_constraintVertical_bias="0.0" />
 
         <Button
             android:id="@+id/button_hard"
             style="@style/ButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:text="@string/hard"
+            android:layout_marginStart="16dp"
             android:onClick="startGame"
             android:tag="HARD"
+            android:text="@string/hard"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/button_medium"
             app:layout_constraintTop_toTopOf="@+id/button_medium" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Spinner
+        android:id="@+id/spinner_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorTextColor"
+        android:textColor="@color/colorTextColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/spinner_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

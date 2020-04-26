@@ -113,7 +113,10 @@ $readAssocStmt->close();
 $mysqli->close();
 
 http_response_code(200);
-echo json_encode($associations, JSON_UNESCAPED_UNICODE);
+
+$response = new stdClass();
+$response->associations = $associations;
+echo json_encode($response, JSON_UNESCAPED_UNICODE);
 
 function prepare($mysqli, $sql) {
     $stmt = $mysqli->prepare($sql);

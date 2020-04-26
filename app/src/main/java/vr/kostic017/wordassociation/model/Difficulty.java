@@ -1,4 +1,4 @@
-package vr.kostic017.wordassociation.enumeration;
+package vr.kostic017.wordassociation.model;
 
 public enum Difficulty {
     EASY,

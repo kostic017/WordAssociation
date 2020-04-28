@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import vr.kostic017.wordassociation.config.App;
 
 public class PlayActivity extends AppCompatActivity {
-    public static final String EXTRA_LANGUAGE = App.PACKAGE_NAME + ".LANGUAGE";
-    public static final String EXTRA_DIFFICULTY = App.PACKAGE_NAME + ".DIFFICULTY";
+    public static final String EXTRA_LANGUAGE = App.PACKAGE + ".LANGUAGE";
+    public static final String EXTRA_DIFFICULTY = App.PACKAGE + ".DIFFICULTY";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

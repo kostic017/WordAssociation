@@ -1,10 +1,35 @@
 <?php
-require_once "model/association.php";
-
 define("DB_HOST", "localhost");
 define("DB_NAME", "associations");
 define("DB_USER", "root");
 define("DB_PASS", "");
+
+class Association {
+    public $id;
+    public $language;
+    public $difficulty;
+    public $a1;
+    public $a2;
+    public $a3;
+    public $a4;
+    public $solutionsA;
+    public $b1;
+    public $b2;
+    public $b3;
+    public $b4;
+    public $solutionsB;
+    public $c1;
+    public $c2;
+    public $c3;
+    public $c4;
+    public $solutionsC;
+    public $d1;
+    public $d2;
+    public $d3;
+    public $d4;
+    public $solutionsD;
+    public $solutions;
+}
 
 header('Content-type: application/json; charset=utf-8');
 
@@ -19,29 +44,24 @@ $mysqli->set_charset("utf8mb4");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
     http_response_code(405);
-    die("Method not Allowed.");
+    die("Method not allowed.");
 }
 
-if (!isset($_GET["language"])) {
-    http_response_code(400);
-    die("Parameter language is missing.");
-}
+$language = getParam("language");
+$difficulty = getParam("difficulty");
 
-$readAssocStmt = prepare($mysqli,
+$readAssocStmt = prepareStatement($mysqli,
     "SELECT assoc.* "
     . "FROM association assoc "
     . "WHERE language_code=? "
+    . "AND difficulty_value=? "
 );
 
-$readAssocStmt->bind_param("s", $_GET["language"]);
+$readAssocStmt->bind_param("ss", $language, $difficulty);
 $readAssocStmt->execute();
 $associationsResult = $readAssocStmt->get_result();
 
-$associations = [
-    "EASY" => [],
-    "MEDIUM" => [],
-    "HARD" => []
-];
+$associations = [];
 
 while ($associationRow = $associationsResult->fetch_object()) {
 
@@ -71,7 +91,7 @@ while ($associationRow = $associationsResult->fetch_object()) {
     $association->solutionsD = [$associationRow->solution_d];
     $association->solutions = [$associationRow->solution];
 
-    $readAltSolStmt = prepare($mysqli,
+    $readAltSolStmt = prepareStatement($mysqli,
         "SELECT alt.symbol_value, alt.alternative "
         . "FROM alternative_solution alt "
         . "WHERE alt.association_id=? "
@@ -104,7 +124,7 @@ while ($associationRow = $associationsResult->fetch_object()) {
     $altSolutionsResult->close();
     $readAltSolStmt->close();
 
-    $associations[$association->difficulty][] = $association;
+    $associations[] = $association;
 
 }
 
@@ -113,12 +133,17 @@ $readAssocStmt->close();
 $mysqli->close();
 
 http_response_code(200);
+echo json_encode($associations, JSON_UNESCAPED_UNICODE);
 
-$response = new stdClass();
-$response->associations = $associations;
-echo json_encode($response, JSON_UNESCAPED_UNICODE);
+function getParam($key) {
+    if (!isset($_GET[$key])) {
+        http_response_code(400);
+        die("Parameter $key is missing.");
+    }
+    return $_GET[$key];
+}
 
-function prepare($mysqli, $sql) {
+function prepareStatement($mysqli, $sql) {
     $stmt = $mysqli->prepare($sql);
 
     if (!$stmt) {

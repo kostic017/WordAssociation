@@ -9,8 +9,6 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -19,7 +17,6 @@ import vr.kostic017.wordassociation.model.Difficulty;
 import vr.kostic017.wordassociation.model.Language;
 import vr.kostic017.wordassociation.webservice.AssociationWebservice;
 import vr.kostic017.wordassociation.webservice.WebserviceUtils;
-import vr.kostic017.wordassociation.webservice.response.AssociationResponse;
 
 public class AssociationRepository {
 
@@ -27,22 +24,21 @@ public class AssociationRepository {
 
     private AssociationWebservice associationWebservice;
 
-    @Inject
     public AssociationRepository(AssociationWebservice associationWebservice) {
         this.associationWebservice = associationWebservice;
     }
 
-    public LiveData<Map<Difficulty, List<Association>>> get(Language language) {
+    public LiveData<Map<Difficulty, List<Association>>> get(Language language, Difficulty difficulty) {
 
         final MutableLiveData<Map<Difficulty, List<Association>>> associations = new MutableLiveData<>();
 
         Log.i(TAG, "Getting all associations for language " + language.getCode());
-        associationWebservice.get(language).enqueue(new Callback<AssociationResponse>() {
+        associationWebservice.get(language, difficulty).enqueue(new Callback<Map<Difficulty, List<Association>>>() {
             @Override
-            public void onResponse(@NonNull Call<AssociationResponse> call, @NonNull Response<AssociationResponse> response) {
+            public void onResponse(@NonNull Call<Map<Difficulty, List<Association>>> call, @NonNull Response<Map<Difficulty, List<Association>>> response) {
                 if (WebserviceUtils.isSuccessful(response)) {
                     if (response.body() != null) {
-                        associations.setValue(response.body().getAssociations());
+                        associations.setValue(response.body());
                     } else {
                         Log.e(TAG, "Response body is missing");
                     }
@@ -50,7 +46,7 @@ public class AssociationRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<AssociationResponse> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<Map<Difficulty, List<Association>>> call, @NonNull Throwable t) {
                 Log.i(TAG, "Request failed", t);
             }
         });

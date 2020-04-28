@@ -11,6 +11,6 @@ import vr.kostic017.wordassociation.model.Difficulty;
 import vr.kostic017.wordassociation.model.Language;
 
 public interface AssociationWebservice {
-    @GET("association.php")
+    @GET("association")
     Call<Map<Difficulty, List<Association>>> get(@Query("language") Language language, @Query("difficulty") Difficulty difficulty);
 }

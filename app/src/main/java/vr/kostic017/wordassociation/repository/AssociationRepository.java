@@ -9,21 +9,23 @@ import androidx.lifecycle.MutableLiveData;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import vr.kostic017.wordassociation.model.Association;
-import vr.kostic017.wordassociation.model.Difficulty;
-import vr.kostic017.wordassociation.model.Language;
+import vr.kostic017.wordassociation.data.Association;
+import vr.kostic017.wordassociation.data.Difficulty;
+import vr.kostic017.wordassociation.data.Language;
 import vr.kostic017.wordassociation.webservice.AssociationWebservice;
 import vr.kostic017.wordassociation.webservice.WebserviceUtils;
 
 public class AssociationRepository {
-
     private static final String TAG = AssociationRepository.class.getSimpleName();
 
     private AssociationWebservice associationWebservice;
 
+    @Inject
     public AssociationRepository(AssociationWebservice associationWebservice) {
         this.associationWebservice = associationWebservice;
     }

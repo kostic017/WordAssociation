@@ -9,12 +9,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
+import vr.kostic017.wordassociation.data.Language;
 import vr.kostic017.wordassociation.databinding.ActivityMenuBinding;
-import vr.kostic017.wordassociation.model.Language;
 
 public class MenuActivity extends AppCompatActivity {
-    private static final String TAG = MenuActivity.class.getSimpleName();
-
     private boolean isDifficultySelected;
     private ActivityMenuBinding activityMenuBinding;
 

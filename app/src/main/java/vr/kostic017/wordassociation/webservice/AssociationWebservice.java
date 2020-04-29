@@ -6,9 +6,9 @@ import java.util.Map;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
-import vr.kostic017.wordassociation.model.Association;
-import vr.kostic017.wordassociation.model.Difficulty;
-import vr.kostic017.wordassociation.model.Language;
+import vr.kostic017.wordassociation.data.Association;
+import vr.kostic017.wordassociation.data.Difficulty;
+import vr.kostic017.wordassociation.data.Language;
 
 public interface AssociationWebservice {
     @GET("association")

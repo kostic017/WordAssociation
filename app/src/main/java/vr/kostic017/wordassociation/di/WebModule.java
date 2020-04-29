@@ -12,7 +12,7 @@ import vr.kostic017.wordassociation.consts.Config;
 import vr.kostic017.wordassociation.webservice.AssociationWebservice;
 
 @Module
-public class NetworkModule {
+public class WebModule {
 
     @Provides
     @Singleton

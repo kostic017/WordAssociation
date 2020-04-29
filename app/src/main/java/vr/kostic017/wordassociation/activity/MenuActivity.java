@@ -1,4 +1,4 @@
-package vr.kostic017.wordassociation;
+package vr.kostic017.wordassociation.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
+import vr.kostic017.wordassociation.R;
 import vr.kostic017.wordassociation.data.Language;
 import vr.kostic017.wordassociation.databinding.ActivityMenuBinding;
 

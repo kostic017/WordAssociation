@@ -1,5 +1,6 @@
 package vr.kostic017.wordassociation.di;
 
+import android.content.Context;
 import android.content.res.AssetManager;
 import android.util.Log;
 
@@ -17,9 +18,15 @@ import vr.kostic017.wordassociation.consts.Config;
 public class ConfigModule {
     private static final String TAG = ConfigModule.class.getSimpleName();
 
+    private AssetManager assetManager;
+
+    public ConfigModule(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
+
     @Provides
     @Singleton
-    Properties provideProperties(AssetManager assetManager) {
+    Properties provideProperties() {
         Properties properties = new Properties();
         try {
             InputStream inputStream = assetManager.open(Config.CONFIG_FILE_NAME);

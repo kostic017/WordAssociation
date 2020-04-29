@@ -7,20 +7,17 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class ConfigProvider {
-
     private static final String CONFIG_FILE_NAME = "config.properties";
 
-    private static Properties properties;
+    private Properties properties;
 
-    public static void init(AssetManager assetManager) throws IOException {
-        if (properties == null) {
-            properties = new Properties();
-            InputStream inputStream = assetManager.open(CONFIG_FILE_NAME);
-            properties.load(inputStream);
-        }
+    public ConfigProvider(AssetManager assetManager) throws IOException {
+        properties = new Properties();
+        InputStream inputStream = assetManager.open(CONFIG_FILE_NAME);
+        properties.load(inputStream);
     }
 
-    public static String getProperty(String key) {
+    public String getProperty(String key) {
         return properties.getProperty(key);
     }
 

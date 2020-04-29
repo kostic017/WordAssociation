@@ -5,18 +5,16 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 
 public class RetrofitProvider {
 
-    private static Retrofit retrofit;
+    private Retrofit retrofit;
 
-    public static void init(String baseUrl) {
-        if (retrofit == null) {
-            retrofit = new Retrofit.Builder()
-                    .baseUrl(baseUrl)
-                    .addConverterFactory(JacksonConverterFactory.create())
-                    .build();
-        }
+    public RetrofitProvider(String baseUrl) {
+        retrofit = new Retrofit.Builder()
+                .baseUrl(baseUrl)
+                .addConverterFactory(JacksonConverterFactory.create())
+                .build();
     }
 
-    public static Retrofit getRetrofit() {
+    public Retrofit getRetrofit() {
         return retrofit;
     }
 

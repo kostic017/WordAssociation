@@ -2,20 +2,15 @@ package vr.kostic017.wordassociation;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.IOException;
 import java.util.Locale;
 
-import vr.kostic017.wordassociation.config.ConfigKey;
 import vr.kostic017.wordassociation.databinding.ActivityMenuBinding;
 import vr.kostic017.wordassociation.model.Language;
-import vr.kostic017.wordassociation.provider.ConfigProvider;
-import vr.kostic017.wordassociation.provider.RetrofitProvider;
 
 public class MenuActivity extends AppCompatActivity {
     private static final String TAG = MenuActivity.class.getSimpleName();
@@ -32,18 +27,6 @@ public class MenuActivity extends AppCompatActivity {
         ArrayAdapter<Language> arrayAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, Language.values());
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         activityMenuBinding.spinnerLanguage.setAdapter(arrayAdapter);
-
-        initProviders();
-    }
-
-    private void initProviders() {
-        try {
-            ConfigProvider.init(getAssets());
-        } catch (IOException e) {
-            Log.e(TAG, "Could not load properties.", e);
-            finish();
-        }
-        RetrofitProvider.init(ConfigProvider.getProperty(ConfigKey.API_BASE_URL));
     }
 
     @Override

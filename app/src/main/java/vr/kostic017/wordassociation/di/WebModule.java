@@ -10,6 +10,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.jackson.JacksonConverterFactory;
 import vr.kostic017.wordassociation.consts.Config;
 import vr.kostic017.wordassociation.webservice.AssociationWebservice;
+import vr.kostic017.wordassociation.webservice.LanguageConverterFactory;
 
 @Module
 public class WebModule {
@@ -20,6 +21,7 @@ public class WebModule {
         return new Retrofit.Builder()
                 .baseUrl(properties.getProperty(Config.API_BASE_URL))
                 .addConverterFactory(JacksonConverterFactory.create())
+                .addConverterFactory(LanguageConverterFactory.create())
                 .build();
     }
 

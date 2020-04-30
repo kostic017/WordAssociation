@@ -3,10 +3,14 @@ package vr.kostic017.wordassociation.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import vr.kostic017.wordassociation.activity.PlayActivity;
+import vr.kostic017.wordassociation.viewmodel.AssociationViewModel;
 
 @Singleton
-@Component(modules = {ConfigModule.class, WebModule.class})
+@Component(modules = {
+        AssistedInjectModule.class,
+        ConfigModule.class,
+        WebModule.class
+})
 public interface ApplicationComponent {
-    void inject(PlayActivity playActivity);
+    AssociationViewModel.Factory associationViewModelFactory();
 }

@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -30,17 +29,18 @@ public class AssociationRepository {
         this.associationWebservice = associationWebservice;
     }
 
-    public LiveData<Map<Difficulty, List<Association>>> get(Language language, Difficulty difficulty) {
+    public LiveData<List<Association>> get(Language language, Difficulty difficulty) {
 
-        final MutableLiveData<Map<Difficulty, List<Association>>> associations = new MutableLiveData<>();
+        final MutableLiveData<List<Association>> associations = new MutableLiveData<>();
 
-        Log.i(TAG, "Getting all associations for language " + language.getCode());
-        associationWebservice.get(language, difficulty).enqueue(new Callback<Map<Difficulty, List<Association>>>() {
+        Log.i(TAG, "Getting all associations for language " + language.getCode() + " and difficulty " + difficulty.name());
+        associationWebservice.get(language, difficulty).enqueue(new Callback<List<Association>>() {
             @Override
-            public void onResponse(@NonNull Call<Map<Difficulty, List<Association>>> call, @NonNull Response<Map<Difficulty, List<Association>>> response) {
+            public void onResponse(@NonNull Call<List<Association>> call, @NonNull Response<List<Association>> response) {
                 if (WebserviceUtils.isSuccessful(response)) {
                     if (response.body() != null) {
                         associations.setValue(response.body());
+                        Log.i(TAG, "Got " + response.body().size() + " results");
                     } else {
                         Log.e(TAG, "Response body is missing");
                     }
@@ -48,7 +48,7 @@ public class AssociationRepository {
             }
 
             @Override
-            public void onFailure(@NonNull Call<Map<Difficulty, List<Association>>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<Association>> call, @NonNull Throwable t) {
                 Log.i(TAG, "Request failed", t);
             }
         });

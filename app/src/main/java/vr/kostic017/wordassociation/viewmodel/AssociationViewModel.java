@@ -1,24 +1,35 @@
 package vr.kostic017.wordassociation.viewmodel;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.List;
-import java.util.Map;
+import com.squareup.inject.assisted.Assisted;
+import com.squareup.inject.assisted.AssistedInject;
 
-import javax.inject.Inject;
+import java.util.List;
 
 import vr.kostic017.wordassociation.data.Association;
 import vr.kostic017.wordassociation.data.Difficulty;
+import vr.kostic017.wordassociation.data.Language;
 import vr.kostic017.wordassociation.repository.AssociationRepository;
 
 public class AssociationViewModel extends ViewModel {
 
-    private AssociationRepository associationRepository;
-    private Map<Difficulty, List<Association>> associations;
+    private LiveData<List<Association>> associations;
 
-    @Inject
-    public AssociationViewModel(AssociationRepository associationRepository) {
-        this.associationRepository = associationRepository;
+    @AssistedInject
+    public AssociationViewModel(@Assisted Language language,
+                                @Assisted Difficulty difficulty,
+                                AssociationRepository associationRepository) {
+        associations = associationRepository.get(language, difficulty);
     }
 
+    @AssistedInject.Factory
+    public interface Factory {
+        AssociationViewModel create(Language language, Difficulty difficulty);
+    }
+
+    public LiveData<List<Association>> getAssociations() {
+        return associations;
+    }
 }

@@ -132,6 +132,7 @@ $associationsResult->close();
 $readAssocStmt->close();
 $mysqli->close();
 
+shuffle($associations);
 http_response_code(200);
 echo json_encode($associations, JSON_UNESCAPED_UNICODE);
 

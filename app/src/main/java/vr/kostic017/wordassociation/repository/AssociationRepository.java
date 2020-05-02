@@ -38,12 +38,12 @@ public class AssociationRepository {
             @Override
             public void onResponse(@NonNull Call<List<Association>> call, @NonNull Response<List<Association>> response) {
                 if (WebserviceUtils.isSuccessful(response)) {
-                    if (response.body() != null) {
-                        associations.setValue(response.body());
-                        Log.i(TAG, "Got " + response.body().size() + " results");
-                    } else {
+                    if (response.body() == null) {
                         Log.e(TAG, "Response body is missing");
+                        return;
                     }
+                    associations.setValue(response.body());
+                    Log.i(TAG, "Got " + response.body().size() + " results");
                 }
             }
 

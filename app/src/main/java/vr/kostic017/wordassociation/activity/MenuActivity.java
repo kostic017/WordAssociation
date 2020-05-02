@@ -1,19 +1,25 @@
 package vr.kostic017.wordassociation.activity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Locale;
 
 import vr.kostic017.wordassociation.R;
+import vr.kostic017.wordassociation.consts.PlayResult;
 import vr.kostic017.wordassociation.data.Language;
 import vr.kostic017.wordassociation.databinding.ActivityMenuBinding;
 
 public class MenuActivity extends AppCompatActivity {
+    public static final int PLAY_REQUEST_CODE = 1;
+
     private boolean isDifficultySelected;
     private ActivityMenuBinding activityMenuBinding;
 
@@ -45,8 +51,18 @@ public class MenuActivity extends AppCompatActivity {
             Intent intent = new Intent(this, PlayActivity.class);
             intent.putExtra(PlayActivity.EXTRA_LANGUAGE, language.getCode());
             intent.putExtra(PlayActivity.EXTRA_DIFFICULTY, (String) view.getTag());
-            startActivity(intent);
+            startActivityForResult(intent, PLAY_REQUEST_CODE);
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK && requestCode == PLAY_REQUEST_CODE && data != null) {
+            PlayResult playResult = PlayResult.valueOf(data.getStringExtra(PlayActivity.EXTRA_RESULT));
+            if (playResult == PlayResult.ERROR_FETCH_ASSOCIATIONS) {
+                Toast.makeText(MenuActivity.this, R.string.error_fetch_associations, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }

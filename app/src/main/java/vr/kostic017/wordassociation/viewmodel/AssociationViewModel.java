@@ -17,13 +17,20 @@ import vr.kostic017.wordassociation.repository.AssociationRepository;
 public class AssociationViewModel extends ViewModel {
     private static final String TAG = AssociationViewModel.class.getSimpleName();
 
-    private LiveData<List<Association>> associations;
+    private MutableLiveData<Boolean> loaded;
+    private MutableLiveData<List<Association>> associations;
     private MutableLiveData<Integer> currentAssociationIndex;
 
     public AssociationViewModel(Language language, Difficulty difficulty,
                                 AssociationRepository associationRepository) {
+        loaded = new MutableLiveData<>(false);
+        currentAssociationIndex = new MutableLiveData<>();
         associations = associationRepository.get(language, difficulty);
-        currentAssociationIndex = new MutableLiveData<>(-1);
+    }
+
+    public void doneLoading() {
+        loaded.setValue(true);
+        currentAssociationIndex.setValue(0);
     }
 
     public Association currentAssociation() {
@@ -42,6 +49,10 @@ public class AssociationViewModel extends ViewModel {
         if (currentAssociationIndex.getValue() != null) {
             currentAssociationIndex.setValue(currentAssociationIndex.getValue() + 1);
         }
+    }
+
+    public LiveData<Boolean> getLoaded() {
+        return loaded;
     }
 
     public LiveData<List<Association>> getAssociations() {

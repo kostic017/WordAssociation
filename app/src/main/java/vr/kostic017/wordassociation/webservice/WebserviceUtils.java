@@ -10,7 +10,7 @@ public class WebserviceUtils {
 
     private static final String TAG = WebserviceUtils.class.getSimpleName();
 
-    public static <T> boolean isSuccessful(Response<T> response) {
+    public static <T> boolean checkResponse(Response<T> response) {
 
         if (response.isSuccessful()) {
             return true;

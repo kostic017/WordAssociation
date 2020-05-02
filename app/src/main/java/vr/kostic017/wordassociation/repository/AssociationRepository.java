@@ -3,7 +3,6 @@ package vr.kostic017.wordassociation.repository;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
@@ -29,26 +28,21 @@ public class AssociationRepository {
         this.associationWebservice = associationWebservice;
     }
 
-    public LiveData<List<Association>> get(Language language, Difficulty difficulty) {
+    public MutableLiveData<List<Association>> get(Language language, Difficulty difficulty) {
 
         final MutableLiveData<List<Association>> associations = new MutableLiveData<>();
+        Log.i(TAG, "Getting associations for language " + language.getCode() + " and difficulty " + difficulty.name());
 
-        Log.i(TAG, "Getting all associations for language " + language.getCode() + " and difficulty " + difficulty.name());
         associationWebservice.get(language, difficulty).enqueue(new Callback<List<Association>>() {
             @Override
             public void onResponse(@NonNull Call<List<Association>> call, @NonNull Response<List<Association>> response) {
-                if (WebserviceUtils.isSuccessful(response)) {
-                    if (response.body() == null) {
-                        Log.e(TAG, "Response body is missing");
-                        return;
-                    }
-                    associations.setValue(response.body());
-                    Log.i(TAG, "Got " + response.body().size() + " results");
-                }
+                WebserviceUtils.checkResponse(response);
+                associations.setValue(response.body());
             }
 
             @Override
             public void onFailure(@NonNull Call<List<Association>> call, @NonNull Throwable t) {
+                associations.setValue(null);
                 Log.i(TAG, "Request failed", t);
             }
         });

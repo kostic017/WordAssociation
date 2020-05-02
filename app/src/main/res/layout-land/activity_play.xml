@@ -5,7 +5,6 @@
 
     <data>
         <import type="android.view.View" />
-        <variable name="loaded" type="androidx.databinding.ObservableBoolean" />
         <variable name="associationViewModel" type="vr.kostic017.wordassociation.viewmodel.AssociationViewModel" />
     </data>
 
@@ -17,7 +16,7 @@
 
         <ProgressBar
             style="@style/ProgressBarStyle"
-            android:visibility="@{!loaded ? View.VISIBLE : View.GONE}"
+            android:visibility="@{!associationViewModel.loaded ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/rootLayout"
             app:layout_constraintEnd_toEndOf="@+id/rootLayout"
             app:layout_constraintStart_toStartOf="@+id/rootLayout"
@@ -28,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:visibility="@{loaded ? View.VISIBLE : View.GONE}"
+            android:visibility="@{associationViewModel.loaded ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

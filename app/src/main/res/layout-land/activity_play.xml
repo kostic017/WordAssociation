@@ -1,246 +1,265 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorMainBackground"
-    tools:context=".activity.PlayActivity">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="android.view.View" />
+        <variable name="loaded" type="androidx.databinding.ObservableBoolean" />
+        <variable name="associationViewModel" type="vr.kostic017.wordassociation.viewmodel.AssociationViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:id="@+id/rootLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorMainBackground">
 
-        <Button
-            android:text="A1"
-            android:id="@+id/button_a1"
+        <ProgressBar
+            style="@style/ProgressBarStyle"
+            android:visibility="@{!loaded ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/rootLayout"
+            app:layout_constraintEnd_toEndOf="@+id/rootLayout"
+            app:layout_constraintStart_toStartOf="@+id/rootLayout"
+            app:layout_constraintTop_toTopOf="@+id/rootLayout" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_a2"
-            app:layout_constraintEnd_toStartOf="@+id/button_b1"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="A2"
-            android:id="@+id/button_a2"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_a3"
-            app:layout_constraintEnd_toStartOf="@+id/button_b2"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="A3"
-            android:id="@+id/button_a3"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_a4"
-            app:layout_constraintEnd_toStartOf="@+id/button_b3"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="A4"
-            android:id="@+id/button_a4"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_solution_a"
-            app:layout_constraintEnd_toStartOf="@+id/button_b4"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="A"
-            android:id="@+id/button_solution_a"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_solution"
-            app:layout_constraintEnd_toStartOf="@+id/button_solution_b"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="B1"
-            android:id="@+id/button_b1"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_b2"
-            app:layout_constraintEnd_toStartOf="@+id/button_c1"
-            app:layout_constraintStart_toEndOf="@+id/button_a1"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="B2"
-            android:id="@+id/button_b2"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_b3"
-            app:layout_constraintEnd_toStartOf="@+id/button_c2"
-            app:layout_constraintStart_toEndOf="@+id/button_a2"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="B3"
-            android:id="@+id/button_b3"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_b4"
-            app:layout_constraintEnd_toStartOf="@+id/button_c3"
-            app:layout_constraintStart_toEndOf="@+id/button_a3"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="B4"
-            android:id="@+id/button_b4"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_solution_b"
-            app:layout_constraintEnd_toStartOf="@+id/button_c4"
-            app:layout_constraintStart_toEndOf="@+id/button_a4"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="B"
-            android:id="@+id/button_solution_b"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_solution"
-            app:layout_constraintEnd_toStartOf="@+id/button_solution_c"
-            app:layout_constraintStart_toEndOf="@+id/button_solution_a"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="C1"
-            android:id="@+id/button_c1"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_c2"
-            app:layout_constraintEnd_toStartOf="@+id/button_d1"
-            app:layout_constraintStart_toEndOf="@+id/button_b1"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="C2"
-            android:id="@+id/button_c2"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_c3"
-            app:layout_constraintEnd_toStartOf="@+id/button_d2"
-            app:layout_constraintStart_toEndOf="@+id/button_b2"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="C3"
-            android:id="@+id/button_c3"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_c4"
-            app:layout_constraintEnd_toStartOf="@+id/button_d3"
-            app:layout_constraintStart_toEndOf="@+id/button_b3"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="C4"
-            android:id="@+id/button_c4"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_solution_c"
-            app:layout_constraintEnd_toStartOf="@+id/button_d4"
-            app:layout_constraintStart_toEndOf="@+id/button_b4"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="C"
-            android:id="@+id/button_solution_c"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_solution"
-            app:layout_constraintEnd_toStartOf="@+id/button_solution_d"
-            app:layout_constraintStart_toEndOf="@+id/button_solution_b"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="D1"
-            android:id="@+id/button_d1"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_d2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_c1"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="D2"
-            android:id="@+id/button_d2"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_d3"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_c2"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="D3"
-            android:id="@+id/button_d3"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_d4"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_c3"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="D4"
-            android:id="@+id/button_d4"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_solution_d"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_c4"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="D"
-            android:id="@+id/button_solution_d"
-            android:layout_marginBottom="8dp"
-            style="@style/ButtonStyle"
-            app:layout_constraintBottom_toTopOf="@+id/button_solution"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/button_solution_c"
-            tools:ignore="HardcodedText" />
-
-        <Button
-            android:text="\???"
-            android:id="@+id/button_solution"
-            style="@style/ButtonStyle"
+            android:visibility="@{loaded ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            tools:ignore="HardcodedText" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <Button
+                android:id="@+id/button_a1"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="A1"
+                app:layout_constraintBottom_toTopOf="@+id/button_a2"
+                app:layout_constraintEnd_toStartOf="@+id/button_b1"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_a2"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="A2"
+                app:layout_constraintBottom_toTopOf="@+id/button_a3"
+                app:layout_constraintEnd_toStartOf="@+id/button_b2"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_a3"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="A3"
+                app:layout_constraintBottom_toTopOf="@+id/button_a4"
+                app:layout_constraintEnd_toStartOf="@+id/button_b3"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_a4"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="A4"
+                app:layout_constraintBottom_toTopOf="@+id/button_solution_a"
+                app:layout_constraintEnd_toStartOf="@+id/button_b4"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_solution_a"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="A"
+                app:layout_constraintBottom_toTopOf="@+id/button_solution"
+                app:layout_constraintEnd_toStartOf="@+id/button_solution_b"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_b1"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="B1"
+                app:layout_constraintBottom_toTopOf="@+id/button_b2"
+                app:layout_constraintEnd_toStartOf="@+id/button_c1"
+                app:layout_constraintStart_toEndOf="@+id/button_a1"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_b2"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="B2"
+                app:layout_constraintBottom_toTopOf="@+id/button_b3"
+                app:layout_constraintEnd_toStartOf="@+id/button_c2"
+                app:layout_constraintStart_toEndOf="@+id/button_a2"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_b3"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="B3"
+                app:layout_constraintBottom_toTopOf="@+id/button_b4"
+                app:layout_constraintEnd_toStartOf="@+id/button_c3"
+                app:layout_constraintStart_toEndOf="@+id/button_a3"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_b4"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="B4"
+                app:layout_constraintBottom_toTopOf="@+id/button_solution_b"
+                app:layout_constraintEnd_toStartOf="@+id/button_c4"
+                app:layout_constraintStart_toEndOf="@+id/button_a4"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_solution_b"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="B"
+                app:layout_constraintBottom_toTopOf="@+id/button_solution"
+                app:layout_constraintEnd_toStartOf="@+id/button_solution_c"
+                app:layout_constraintStart_toEndOf="@+id/button_solution_a"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_c1"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="C1"
+                app:layout_constraintBottom_toTopOf="@+id/button_c2"
+                app:layout_constraintEnd_toStartOf="@+id/button_d1"
+                app:layout_constraintStart_toEndOf="@+id/button_b1"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_c2"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="C2"
+                app:layout_constraintBottom_toTopOf="@+id/button_c3"
+                app:layout_constraintEnd_toStartOf="@+id/button_d2"
+                app:layout_constraintStart_toEndOf="@+id/button_b2"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_c3"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="C3"
+                app:layout_constraintBottom_toTopOf="@+id/button_c4"
+                app:layout_constraintEnd_toStartOf="@+id/button_d3"
+                app:layout_constraintStart_toEndOf="@+id/button_b3"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_c4"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="C4"
+                app:layout_constraintBottom_toTopOf="@+id/button_solution_c"
+                app:layout_constraintEnd_toStartOf="@+id/button_d4"
+                app:layout_constraintStart_toEndOf="@+id/button_b4"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_solution_c"
+                style="@style/ButtonStyle"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="C"
+                app:layout_constraintBottom_toTopOf="@+id/button_solution"
+                app:layout_constraintEnd_toStartOf="@+id/button_solution_d"
+                app:layout_constraintStart_toEndOf="@+id/button_solution_b"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_d1"
+                style="@style/ButtonStyle"
+                android:layout_marginBottom="8dp"
+                android:text="D1"
+                app:layout_constraintBottom_toTopOf="@+id/button_d2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_c1"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_d2"
+                style="@style/ButtonStyle"
+                android:layout_marginBottom="8dp"
+                android:text="D2"
+                app:layout_constraintBottom_toTopOf="@+id/button_d3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_c2"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_d3"
+                style="@style/ButtonStyle"
+                android:layout_marginBottom="8dp"
+                android:text="D3"
+                app:layout_constraintBottom_toTopOf="@+id/button_d4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_c3"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_d4"
+                style="@style/ButtonStyle"
+                android:layout_marginBottom="8dp"
+                android:text="D4"
+                app:layout_constraintBottom_toTopOf="@+id/button_solution_d"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_c4"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_solution_d"
+                style="@style/ButtonStyle"
+                android:layout_marginBottom="8dp"
+                android:text="D"
+                app:layout_constraintBottom_toTopOf="@+id/button_solution"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/button_solution_c"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                android:id="@+id/button_solution"
+                style="@style/ButtonStyle"
+                android:text="\???"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:ignore="HardcodedText" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

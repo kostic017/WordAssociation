@@ -4,11 +4,14 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ObservableBoolean;
 
 import vr.kostic017.wordassociation.AssociationApplication;
 import vr.kostic017.wordassociation.R;
 import vr.kostic017.wordassociation.data.Difficulty;
 import vr.kostic017.wordassociation.data.Language;
+import vr.kostic017.wordassociation.databinding.ActivityPlayBinding;
 import vr.kostic017.wordassociation.di.ApplicationComponent;
 import vr.kostic017.wordassociation.viewmodel.AssociationViewModel;
 
@@ -16,6 +19,7 @@ public class PlayActivity extends AppCompatActivity {
     public static final String EXTRA_LANGUAGE = AssociationApplication.PACKAGE + ".LANGUAGE";
     public static final String EXTRA_DIFFICULTY = AssociationApplication.PACKAGE + ".DIFFICULTY";
 
+    private ObservableBoolean loaded;
     private AssociationViewModel associationViewModel;
 
     @Override
@@ -24,19 +28,25 @@ public class PlayActivity extends AppCompatActivity {
                 ((AssociationApplication) getApplicationContext()).getApplicationComponent();
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_play);
 
-        String languageExtra = getIntent().getStringExtra(EXTRA_LANGUAGE);
-        String difficultyExtra = getIntent().getStringExtra(EXTRA_DIFFICULTY);
+        Language language = Language.fromCode(getIntent().getStringExtra(EXTRA_LANGUAGE));
+        Difficulty difficulty = Difficulty.valueOf(getIntent().getStringExtra(EXTRA_DIFFICULTY));
 
-        Language language = Language.fromCode(languageExtra);
-        Difficulty difficulty = Difficulty.valueOf(difficultyExtra);
         associationViewModel = applicationComponent.associationViewModelFactory().create(language, difficulty);
+        loaded = new ObservableBoolean(false);
+
+        ActivityPlayBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_play);
+        binding.setLoaded(loaded);
+        binding.setAssociationViewModel(associationViewModel);
+        binding.setLifecycleOwner(this);
 
         associationViewModel.getAssociations().observe(this, associations -> {
-            if (associations != null && !associations.isEmpty()) {
-                Toast.makeText(PlayActivity.this, associations.get(0).getSolutions().get(0), Toast.LENGTH_SHORT).show();
-            }
+            loaded.set(true);
+            associationViewModel.nextAssociation();
+        });
+
+        associationViewModel.getCurrentAssociationIndex().observe(this, index -> {
+
         });
     }
 }

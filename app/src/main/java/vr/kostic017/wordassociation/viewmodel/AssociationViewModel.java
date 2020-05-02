@@ -6,9 +6,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.squareup.inject.assisted.Assisted;
-import com.squareup.inject.assisted.AssistedInject;
-
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -23,17 +20,10 @@ public class AssociationViewModel extends ViewModel {
     private LiveData<List<Association>> associations;
     private MutableLiveData<Integer> currentAssociationIndex;
 
-    @AssistedInject
-    public AssociationViewModel(@Assisted Language language,
-                                @Assisted Difficulty difficulty,
+    public AssociationViewModel(Language language, Difficulty difficulty,
                                 AssociationRepository associationRepository) {
         associations = associationRepository.get(language, difficulty);
         currentAssociationIndex = new MutableLiveData<>(-1);
-    }
-
-    @AssistedInject.Factory
-    public interface Factory {
-        AssociationViewModel create(Language language, Difficulty difficulty);
     }
 
     public Association currentAssociation() {

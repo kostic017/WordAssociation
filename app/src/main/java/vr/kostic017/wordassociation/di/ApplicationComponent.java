@@ -3,7 +3,7 @@ package vr.kostic017.wordassociation.di;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import vr.kostic017.wordassociation.viewmodel.AssociationViewModel;
+import vr.kostic017.wordassociation.viewmodel.AssociationViewModelFactory;
 
 @Singleton
 @Component(modules = {
@@ -12,5 +12,5 @@ import vr.kostic017.wordassociation.viewmodel.AssociationViewModel;
         WebModule.class
 })
 public interface ApplicationComponent {
-    AssociationViewModel.Factory associationViewModelFactory();
+    AssociationViewModelFactory.Factory associationViewModelFactory();
 }

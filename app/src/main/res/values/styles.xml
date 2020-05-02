@@ -14,7 +14,7 @@
     </style>
 
     <style name="ButtonStyle">
-        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
         <item name="android:ellipsize">end</item>
         <item name="android:paddingEnd">5dp</item>
         <item name="android:paddingStart">5dp</item>

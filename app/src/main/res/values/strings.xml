@@ -3,5 +3,5 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
-    <string name="error_fetch_associations">Sorry, could not fetch associations.</string>
+    <string name="error_fetch_associations">Could not fetch associations.</string>
 </resources>

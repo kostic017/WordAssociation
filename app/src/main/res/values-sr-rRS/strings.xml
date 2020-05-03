@@ -4,5 +4,5 @@
     <string name="easy">Lako</string>
     <string name="medium">Srednje</string>
     <string name="hard">Teško</string>
-    <string name="error_fetch_associations">Žao nam je, nismo uspeli da dovučemo asocijacije.</string>
+    <string name="error_fetch_associations">Nismo uspeli da dovučemo asocijacije.</string>
 </resources>

@@ -45,7 +45,7 @@ public class PlayActivity extends AppCompatActivity {
         binding.setLifecycleOwner(this);
 
         associationViewModel.getAssociations().observe(this, associations -> {
-            if (associations != null) {
+            if (associations != null && !associations.isEmpty()) {
                 associationViewModel.doneLoading();
             } else {
                 finish(PlayActivityResult.ERROR_FETCH_ASSOCIATIONS);

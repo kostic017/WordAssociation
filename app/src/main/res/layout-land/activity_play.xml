@@ -4,6 +4,7 @@
 
     <data>
         <import type="android.view.View" />
+        <import type="vr.kostic017.wordassociation.consts.Config" />
         <variable
             name="activity"
             type="vr.kostic017.wordassociation.activity.PlayActivity" />
@@ -16,7 +17,7 @@
         android:background="@color/colorMainBackground">
 
         <ProgressBar
-            style="@style/ProgressBarStyle"
+            style="@style/ProgressBarStyleIndeterministic"
             android:visibility="@{!activity.viewModel.loaded ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/rootLayout"
             app:layout_constraintEnd_toEndOf="@+id/rootLayout"
@@ -27,8 +28,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
+            android:layout_marginBottom="32dp"
             android:visibility="@{activity.viewModel.loaded ? View.VISIBLE : View.GONE}"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/progressBarTime"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -36,7 +38,7 @@
             <Button
                 android:id="@+id/button_a1"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
                 android:layout_marginBottom="8dp"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.A1)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.A1)}"
@@ -48,8 +50,8 @@
             <Button
                 android:id="@+id/button_a2"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.A2)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.A2)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.A2) ? `A2` : activity.viewModel.currentAssociation.a2}"
@@ -60,8 +62,8 @@
             <Button
                 android:id="@+id/button_a3"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.A3)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.A3)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.A3) ? `A3` : activity.viewModel.currentAssociation.a3}"
@@ -72,8 +74,8 @@
             <Button
                 android:id="@+id/button_a4"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.A4)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.A4)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.A4) ? `A4` : activity.viewModel.currentAssociation.a4}"
@@ -84,8 +86,8 @@
             <Button
                 android:id="@+id/button_solution_a"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.A)}"
                 android:onClick="@{() -> activity.tryAnswer(Cell.A)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.A) ? `A` : activity.viewModel.currentAssociation.solutionsA[0]}"
@@ -96,8 +98,8 @@
             <Button
                 android:id="@+id/button_b1"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.B1)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.B1)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.B1) ? `B1` : activity.viewModel.currentAssociation.b1}"
@@ -108,8 +110,8 @@
             <Button
                 android:id="@+id/button_b2"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.B2)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.B2)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.B2) ? `B2` : activity.viewModel.currentAssociation.b2}"
@@ -120,8 +122,8 @@
             <Button
                 android:id="@+id/button_b3"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.B3)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.B3)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.B3) ? `B3` : activity.viewModel.currentAssociation.b3}"
@@ -132,8 +134,8 @@
             <Button
                 android:id="@+id/button_b4"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.B4)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.B4)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.B4) ? `B4` : activity.viewModel.currentAssociation.b4}"
@@ -144,7 +146,7 @@
             <Button
                 android:id="@+id/button_solution_b"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
                 android:layout_marginBottom="8dp"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.B)}"
                 android:onClick="@{() -> activity.tryAnswer(Cell.B)}"
@@ -157,7 +159,7 @@
                 android:id="@+id/button_c1"
                 style="@style/ButtonStyle"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.C1)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.C1)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.C1) ? `C1` : activity.viewModel.currentAssociation.c1}"
@@ -168,8 +170,8 @@
             <Button
                 android:id="@+id/button_c2"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.C2)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.C2)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.C2) ? `C2` : activity.viewModel.currentAssociation.c2}"
@@ -180,8 +182,8 @@
             <Button
                 android:id="@+id/button_c3"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.C3)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.C3)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.C3) ? `C3` : activity.viewModel.currentAssociation.c3}"
@@ -192,8 +194,8 @@
             <Button
                 android:id="@+id/button_c4"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.C4)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.C4)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.C4) ? `C4` : activity.viewModel.currentAssociation.c4}"
@@ -204,8 +206,8 @@
             <Button
                 android:id="@+id/button_solution_c"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.C)}"
                 android:onClick="@{() -> activity.tryAnswer(Cell.C)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.C) ? `C` : activity.viewModel.currentAssociation.solutionsC[0]}"
@@ -216,7 +218,7 @@
             <Button
                 android:id="@+id/button_d1"
                 style="@style/ButtonStyle"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.D1)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.D1)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.D1) ? `D1` : activity.viewModel.currentAssociation.d1}"
@@ -227,7 +229,7 @@
             <Button
                 android:id="@+id/button_d2"
                 style="@style/ButtonStyle"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.D2)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.D2)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.D2) ? `D2` : activity.viewModel.currentAssociation.d2}"
@@ -238,7 +240,7 @@
             <Button
                 android:id="@+id/button_d3"
                 style="@style/ButtonStyle"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.D3)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.D3)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.D3) ? `D3` : activity.viewModel.currentAssociation.d3}"
@@ -249,7 +251,7 @@
             <Button
                 android:id="@+id/button_d4"
                 style="@style/ButtonStyle"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.D4)}"
                 android:onClick="@{() -> activity.viewModel.openCell(Cell.D4)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.D4) ? `D4` : activity.viewModel.currentAssociation.d4}"
@@ -260,7 +262,7 @@
             <Button
                 android:id="@+id/button_solution_d"
                 style="@style/ButtonStyle"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.D)}"
                 android:onClick="@{() -> activity.tryAnswer(Cell.D)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.D) ? `D` : activity.viewModel.currentAssociation.solutionsD[0]}"
@@ -271,7 +273,7 @@
             <Button
                 android:id="@+id/button_solution"
                 style="@style/ButtonStyle"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="@dimen/landscape_button_margin"
                 android:enabled="@{activity.viewModel.closedCells.get(Cell.F)}"
                 android:onClick="@{() -> activity.tryAnswer(Cell.F)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.F) ? `???` : activity.viewModel.currentAssociation.solutions[0]}"
@@ -292,6 +294,17 @@
                 app:srcCompat="@drawable/ic_fast_forward" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBarTime"
+            style="@style/ProgressBarStyleDeterministic"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="@{Config.Values.COUNT_DOWN_TIME}"
+            android:progress="@{activity.viewModel.timeLeft}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

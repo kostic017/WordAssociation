@@ -1,5 +1,6 @@
 package vr.kostic017.wordassociation.viewmodel;
 
+import android.os.CountDownTimer;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -12,6 +13,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 
 import vr.kostic017.wordassociation.consts.Cell;
+import vr.kostic017.wordassociation.consts.Config;
 import vr.kostic017.wordassociation.data.Association;
 import vr.kostic017.wordassociation.data.Difficulty;
 import vr.kostic017.wordassociation.data.Language;
@@ -20,10 +22,13 @@ import vr.kostic017.wordassociation.repository.AssociationRepository;
 public class AssociationViewModel extends ViewModel {
     private static final String TAG = AssociationViewModel.class.getSimpleName();
 
+    private int score;
     private int currentAssociationIndex;
+    private CountDownTimer countDownTimer;
     private Association currentAssociation;
 
     private MutableLiveData<Boolean> loaded;
+    private MutableLiveData<Integer> timeLeft;
     private MutableLiveData<List<Association>> associations;
     private Map<Cell, MutableLiveData<Boolean>> closedCells;
 
@@ -32,6 +37,7 @@ public class AssociationViewModel extends ViewModel {
 
         currentAssociationIndex = -1;
         loaded = new MutableLiveData<>(false);
+        timeLeft = new MutableLiveData<>(100);
         associations = associationRepository.get(language, difficulty);
 
         closedCells = new HashMap<>();
@@ -39,11 +45,29 @@ public class AssociationViewModel extends ViewModel {
             closedCells.put(cell, new MutableLiveData<>(true));
         }
 
+        countDownTimer = new CountDownTimer(Config.Values.COUNT_DOWN_TIME, Config.Values.COUNT_DOWN_INTERVAL) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                timeLeft.setValue(Math.toIntExact(millisUntilFinished));
+            }
+
+            @Override
+            public void onFinish() {
+                timeLeft.setValue(0);
+            }
+        };
+
+    }
+
+    @Override
+    protected void onCleared() {
+        countDownTimer.cancel();
     }
 
     public void doneLoading() {
         if (loaded.getValue() != null && !loaded.getValue()) {
             loaded.setValue(true);
+            countDownTimer.start();
             nextAssociation();
         }
     }
@@ -84,6 +108,7 @@ public class AssociationViewModel extends ViewModel {
             openRow(Cell.C);
             openRow(Cell.D);
             openCell(Cell.F);
+            score += Config.Values.POINTS_PER_SOLUTION;
         } else {
             openRow(solutionCell);
         }
@@ -125,12 +150,20 @@ public class AssociationViewModel extends ViewModel {
         openCell(Cell.valueOf(solutionCell.name() + "4"));
     }
 
+    public int getScore() {
+        return score;
+    }
+
     public Association getCurrentAssociation() {
         return currentAssociation;
     }
 
     public LiveData<Boolean> getLoaded() {
         return loaded;
+    }
+
+    public LiveData<Integer> getTimeLeft() {
+        return timeLeft;
     }
 
     public LiveData<List<Association>> getAssociations() {

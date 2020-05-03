@@ -6,7 +6,9 @@
     <string name="hard">Teško</string>
     <string name="your_answer">Vaš odgovor</string>
     <string name="wrong_answer">Pogrešan odgovor.</string>
-    <string name="no_more_associations">Nema više asocijacija te težine.</string>
+    <string name="out_of_time">Vreme je isteklo!</string>
+    <string name="out_of_associations">Rešili ste sve asocijacije te težine.</string>
+    <string name="new_high_score">NAJVEĆI BROJ POENA DO SADA!</string>
     <string name="error_fetch_associations">Nismo uspeli da dovučemo asocijacije.</string>
     <string name="next_association">Sledeća asocijacija</string>
 </resources>

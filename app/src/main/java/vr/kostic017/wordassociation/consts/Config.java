@@ -8,6 +8,8 @@ public class Config {
     }
 
     public static class Values {
-        public static final int NEXT_ASSOCIATION_DELAY = 4000;
+        public static final int POINTS_PER_SOLUTION =  10;
+        public static final int COUNT_DOWN_TIME = 5 * 60 * 1000;
+        public static final int COUNT_DOWN_INTERVAL = 1000;
     }
 }

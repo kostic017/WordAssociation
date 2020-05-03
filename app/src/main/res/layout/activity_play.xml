@@ -5,6 +5,7 @@
     <data>
         <import type="android.view.View" />
         <import type="vr.kostic017.wordassociation.consts.Cell" />
+        <import type="vr.kostic017.wordassociation.consts.Config" />
         <variable
             name="activity"
             type="vr.kostic017.wordassociation.activity.PlayActivity" />
@@ -17,7 +18,7 @@
         android:background="@color/colorMainBackground">
 
         <ProgressBar
-            style="@style/ProgressBarStyle"
+            style="@style/ProgressBarStyleIndeterministic"
             android:visibility="@{!activity.viewModel.loaded ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/rootLayout"
             app:layout_constraintEnd_toEndOf="@+id/rootLayout"
@@ -285,9 +286,21 @@
                 android:onClick="@{() -> activity.tryAnswer(Cell.F)}"
                 android:text="@{activity.viewModel.closedCells.get(Cell.F) ? `???` : activity.viewModel.currentAssociation.solutions[0]}"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/progressBarTime"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBarTime"
+                style="@style/ProgressBarStyleDeterministic"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="@{Config.Values.COUNT_DOWN_TIME}"
+                android:progress="@{activity.viewModel.timeLeft}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,7 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import vr.kostic017.wordassociation.AssociationApplication;
 import vr.kostic017.wordassociation.R;
 import vr.kostic017.wordassociation.consts.Cell;
-import vr.kostic017.wordassociation.consts.PlayActivityResult;
+import vr.kostic017.wordassociation.consts.PlayResultCode;
 import vr.kostic017.wordassociation.data.Difficulty;
 import vr.kostic017.wordassociation.data.Language;
 import vr.kostic017.wordassociation.databinding.ActivityPlayBinding;
@@ -29,9 +28,10 @@ import vr.kostic017.wordassociation.viewmodel.AssociationViewModelFactory;
 public class PlayActivity extends AppCompatActivity {
     private static final String TAG = PlayActivity.class.getSimpleName();
 
-    public static final String EXTRA_RESULT = AssociationApplication.PACKAGE + ".RESULT";
+    public static final String EXTRA_SCORE = AssociationApplication.PACKAGE + ".SCORE";
     public static final String EXTRA_LANGUAGE = AssociationApplication.PACKAGE + ".LANGUAGE";
     public static final String EXTRA_DIFFICULTY = AssociationApplication.PACKAGE + ".DIFFICULTY";
+    public static final String EXTRA_RESULT_CODE = AssociationApplication.PACKAGE + ".RESULT_CODE";
 
     private AssociationViewModel viewModel;
 
@@ -58,7 +58,20 @@ public class PlayActivity extends AppCompatActivity {
             if (associations != null && !associations.isEmpty()) {
                 viewModel.doneLoading();
             } else {
-                finish(PlayActivityResult.ERROR_FETCH_ASSOCIATIONS);
+                Intent result = new Intent();
+                result.putExtra(PlayActivity.EXTRA_RESULT_CODE, PlayResultCode.ERROR_FETCH_ASSOCIATIONS);
+                setResult(Activity.RESULT_OK, result);
+                finish();
+            }
+        });
+
+        viewModel.getTimeLeft().observe(this, timeLeft -> {
+            if (timeLeft.equals(0)) {
+                Intent result = new Intent();
+                result.putExtra(PlayActivity.EXTRA_RESULT_CODE, PlayResultCode.OUT_OF_TIME.name());
+                result.putExtra(PlayActivity.EXTRA_SCORE, viewModel.getScore());
+                setResult(Activity.RESULT_OK, result);
+                finish();
             }
         });
     }
@@ -93,15 +106,12 @@ public class PlayActivity extends AppCompatActivity {
 
     public void nextAssociation() {
         if (!PlayActivity.this.viewModel.nextAssociation()) {
-            finish(PlayActivityResult.NO_MORE_ASSOCIATIONS);
+            Intent result = new Intent();
+            result.putExtra(PlayActivity.EXTRA_RESULT_CODE, PlayResultCode.OUT_OF_ASSOCIATIONS.name());
+            result.putExtra(PlayActivity.EXTRA_SCORE, viewModel.getScore());
+            setResult(Activity.RESULT_OK, result);
+            finish();
         }
-    }
-
-    private void finish(PlayActivityResult playActivityResult) {
-        Intent result = new Intent();
-        result.putExtra(PlayActivity.EXTRA_RESULT, playActivityResult.name());
-        setResult(Activity.RESULT_OK, result);
-        finish();
     }
 
     public AssociationViewModel getViewModel() {

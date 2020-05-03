@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Word Association</string>
     <string name="easy">Easy</string>
@@ -5,7 +6,9 @@
     <string name="hard">Hard</string>
     <string name="your_answer">Your answer</string>
     <string name="wrong_answer">Wrong answer.</string>
-    <string name="no_more_associations">Nema više asocijacija te težine.</string>
+    <string name="out_of_time">You are out of time!</string>
+    <string name="out_of_associations">No more associations with that difficulty.</string>
+    <string name="new_high_score">NEW HIGH SCORE!</string>
     <string name="error_fetch_associations">Could not fetch associations.</string>
     <string name="next_association">Next Association</string>
 </resources>

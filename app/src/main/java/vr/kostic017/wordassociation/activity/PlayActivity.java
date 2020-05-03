@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.InputType;
+import android.util.Log;
+import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,7 +18,6 @@ import androidx.lifecycle.ViewModelProvider;
 import vr.kostic017.wordassociation.AssociationApplication;
 import vr.kostic017.wordassociation.R;
 import vr.kostic017.wordassociation.consts.Cell;
-import vr.kostic017.wordassociation.consts.Config;
 import vr.kostic017.wordassociation.consts.PlayActivityResult;
 import vr.kostic017.wordassociation.data.Difficulty;
 import vr.kostic017.wordassociation.data.Language;
@@ -26,6 +27,8 @@ import vr.kostic017.wordassociation.viewmodel.AssociationViewModel;
 import vr.kostic017.wordassociation.viewmodel.AssociationViewModelFactory;
 
 public class PlayActivity extends AppCompatActivity {
+    private static final String TAG = PlayActivity.class.getSimpleName();
+
     public static final String EXTRA_RESULT = AssociationApplication.PACKAGE + ".RESULT";
     public static final String EXTRA_LANGUAGE = AssociationApplication.PACKAGE + ".LANGUAGE";
     public static final String EXTRA_DIFFICULTY = AssociationApplication.PACKAGE + ".DIFFICULTY";
@@ -63,7 +66,8 @@ public class PlayActivity extends AppCompatActivity {
     public void tryAnswer(Cell solutionCell) {
         final EditText input = new EditText(this);
         input.setInputType(InputType.TYPE_CLASS_TEXT);
-        new AlertDialog.Builder(this)
+
+        AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.your_answer)
                 .setView(input)
                 .setPositiveButton(android.R.string.yes, (dialog, which) -> {
@@ -72,7 +76,20 @@ public class PlayActivity extends AppCompatActivity {
                     }
                 })
                 .setNegativeButton(android.R.string.no, null)
-                .show();
+                .create();
+
+        input.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) {
+                if (alertDialog.getWindow() != null) {
+                    alertDialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+                } else {
+                    Log.w(TAG, "Could not get window reference.");
+                }
+            }
+        });
+
+        input.requestFocus();
+        alertDialog.show();
     }
 
     public void nextAssociation() {

@@ -3,7 +3,6 @@ package vr.kostic017.wordassociation.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
@@ -11,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import vr.kostic017.wordassociation.AssociationApplication;
 import vr.kostic017.wordassociation.R;
-import vr.kostic017.wordassociation.consts.PlayResult;
+import vr.kostic017.wordassociation.consts.PlayActivityResult;
 import vr.kostic017.wordassociation.data.Difficulty;
 import vr.kostic017.wordassociation.data.Language;
 import vr.kostic017.wordassociation.databinding.ActivityPlayBinding;
@@ -49,7 +48,7 @@ public class PlayActivity extends AppCompatActivity {
             if (associations != null) {
                 associationViewModel.doneLoading();
             } else {
-                finish(PlayResult.ERROR_FETCH_ASSOCIATIONS);
+                finish(PlayActivityResult.ERROR_FETCH_ASSOCIATIONS);
             }
         });
 
@@ -58,9 +57,9 @@ public class PlayActivity extends AppCompatActivity {
         });
     }
 
-    private void finish(PlayResult playResult) {
+    private void finish(PlayActivityResult playActivityResult) {
         Intent result = new Intent();
-        result.putExtra(PlayActivity.EXTRA_RESULT, playResult.toString());
+        result.putExtra(PlayActivity.EXTRA_RESULT, playActivityResult.toString());
         setResult(Activity.RESULT_OK, result);
         finish();
     }

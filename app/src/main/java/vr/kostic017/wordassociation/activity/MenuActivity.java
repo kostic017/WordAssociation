@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.Locale;
 
 import vr.kostic017.wordassociation.R;
-import vr.kostic017.wordassociation.consts.PlayResult;
+import vr.kostic017.wordassociation.consts.PlayActivityResult;
 import vr.kostic017.wordassociation.data.Language;
 import vr.kostic017.wordassociation.databinding.ActivityMenuBinding;
 
@@ -59,8 +59,8 @@ public class MenuActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == PLAY_REQUEST_CODE && data != null) {
-            PlayResult playResult = PlayResult.valueOf(data.getStringExtra(PlayActivity.EXTRA_RESULT));
-            if (playResult == PlayResult.ERROR_FETCH_ASSOCIATIONS) {
+            PlayActivityResult playActivityResult = PlayActivityResult.valueOf(data.getStringExtra(PlayActivity.EXTRA_RESULT));
+            if (playActivityResult == PlayActivityResult.ERROR_FETCH_ASSOCIATIONS) {
                 Toast.makeText(MenuActivity.this, R.string.error_fetch_associations, Toast.LENGTH_LONG).show();
             }
         }

@@ -59,7 +59,7 @@ public class PlayActivity extends AppCompatActivity {
                 viewModel.doneLoading();
             } else {
                 Intent result = new Intent();
-                result.putExtra(PlayActivity.EXTRA_RESULT_CODE, PlayResultCode.ERROR_FETCH_ASSOCIATIONS);
+                result.putExtra(PlayActivity.EXTRA_RESULT_CODE, PlayResultCode.ERROR_FETCH_ASSOCIATIONS.name());
                 setResult(Activity.RESULT_OK, result);
                 finish();
             }

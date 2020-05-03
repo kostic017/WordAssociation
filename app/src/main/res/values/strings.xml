@@ -3,5 +3,9 @@
     <string name="easy">Easy</string>
     <string name="medium">Medium</string>
     <string name="hard">Hard</string>
+    <string name="your_answer">Your answer</string>
+    <string name="wrong_answer">Wrong answer.</string>
+    <string name="no_more_associations">Nema više asocijacija te težine.</string>
     <string name="error_fetch_associations">Could not fetch associations.</string>
+    <string name="next_association">Next Association</string>
 </resources>

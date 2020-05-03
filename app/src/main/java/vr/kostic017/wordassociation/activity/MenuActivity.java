@@ -60,8 +60,13 @@ public class MenuActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK && requestCode == PLAY_REQUEST_CODE && data != null) {
             PlayActivityResult playActivityResult = PlayActivityResult.valueOf(data.getStringExtra(PlayActivity.EXTRA_RESULT));
-            if (playActivityResult == PlayActivityResult.ERROR_FETCH_ASSOCIATIONS) {
-                Toast.makeText(MenuActivity.this, R.string.error_fetch_associations, Toast.LENGTH_SHORT).show();
+            switch (playActivityResult) {
+                case ERROR_FETCH_ASSOCIATIONS:
+                    Toast.makeText(MenuActivity.this, R.string.error_fetch_associations, Toast.LENGTH_SHORT).show();
+                    break;
+                case NO_MORE_ASSOCIATIONS:
+                    Toast.makeText(MenuActivity.this, R.string.no_more_associations, Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
     }

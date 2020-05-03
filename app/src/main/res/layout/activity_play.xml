@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View" />
-        <variable name="associationViewModel" type="vr.kostic017.wordassociation.viewmodel.AssociationViewModel" />
+        <import type="vr.kostic017.wordassociation.consts.Cell" />
+        <variable
+            name="activity"
+            type="vr.kostic017.wordassociation.activity.PlayActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +18,7 @@
 
         <ProgressBar
             style="@style/ProgressBarStyle"
-            android:visibility="@{!associationViewModel.loaded ? View.VISIBLE : View.GONE}"
+            android:visibility="@{!activity.viewModel.loaded ? View.VISIBLE : View.GONE}"
             app:layout_constraintBottom_toBottomOf="@+id/rootLayout"
             app:layout_constraintEnd_toEndOf="@+id/rootLayout"
             app:layout_constraintStart_toStartOf="@+id/rootLayout"
@@ -26,233 +28,266 @@
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="@{associationViewModel.loaded ? View.VISIBLE : View.GONE}">
+            android:visibility="@{activity.viewModel.loaded ? View.VISIBLE : View.GONE}">
+
+            <ImageButton
+                style="@style/ButtonStyle"
+                android:layout_width="@dimen/forward_button_size"
+                android:layout_height="@dimen/forward_button_size"
+                android:layout_marginTop="16dp"
+                android:contentDescription="@string/next_association"
+                android:onClick="@{() -> activity.nextAssociation()}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_fast_forward" />
 
             <Button
                 android:id="@+id/button_a1"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="8dp"
-                android:text="A1"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.A1)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.A1)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.A1) ? `A1` : activity.viewModel.currentAssociation.a1}"
                 app:layout_constraintBottom_toTopOf="@+id/button_a2"
                 app:layout_constraintEnd_toStartOf="@+id/button_b1"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_a2"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginEnd="24dp"
                 android:layout_marginBottom="8dp"
-                android:text="A2"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.A2)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.A2)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.A2) ? `A2` : activity.viewModel.currentAssociation.a2}"
                 app:layout_constraintBottom_toTopOf="@+id/button_a3"
                 app:layout_constraintEnd_toStartOf="@+id/button_b2"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_a3"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="A3"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.A3)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.A3)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.A3) ? `A3` : activity.viewModel.currentAssociation.a3}"
                 app:layout_constraintBottom_toTopOf="@+id/button_a4"
                 app:layout_constraintEnd_toStartOf="@+id/button_b3"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_a4"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="A4"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.A4)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.A4)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.A4) ? `A4` : activity.viewModel.currentAssociation.a4}"
                 app:layout_constraintBottom_toTopOf="@+id/solution_a"
                 app:layout_constraintEnd_toStartOf="@+id/button_b4"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/button_b1"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginStart="32dp"
                 android:layout_marginBottom="8dp"
-                android:text="B1"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.B1)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.B1)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.B1) ? `B1` : activity.viewModel.currentAssociation.b1}"
                 app:layout_constraintBottom_toTopOf="@+id/button_b2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button_a1"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toEndOf="@+id/button_a1" />
 
             <Button
                 android:id="@+id/button_b2"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginStart="24dp"
                 android:layout_marginBottom="8dp"
-                android:text="B2"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.B2)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.B2)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.B2) ? `B2` : activity.viewModel.currentAssociation.b2}"
                 app:layout_constraintBottom_toTopOf="@+id/button_b3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button_a2"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toEndOf="@+id/button_a2" />
 
             <Button
                 android:id="@+id/button_b3"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginStart="16dp"
                 android:layout_marginBottom="8dp"
-                android:text="B3"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.B3)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.B3)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.B3) ? `B3` : activity.viewModel.currentAssociation.b3}"
                 app:layout_constraintBottom_toTopOf="@+id/button_b4"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button_a3"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toEndOf="@+id/button_a3" />
 
             <Button
                 android:id="@+id/button_b4"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginStart="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="B4"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.B4)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.B4)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.B4) ? `B4` : activity.viewModel.currentAssociation.b4}"
                 app:layout_constraintBottom_toTopOf="@+id/solution_b"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button_a4"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toEndOf="@+id/button_a4" />
 
             <Button
                 android:id="@+id/button_c1"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                android:text="C1"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.C1)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.C1)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.C1) ? `C1` : activity.viewModel.currentAssociation.c1}"
                 app:layout_constraintEnd_toStartOf="@+id/button_d1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_c2"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/button_c2" />
 
             <Button
                 android:id="@+id/button_c2"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:text="C2"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.C2)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.C2)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.C2) ? `C2` : activity.viewModel.currentAssociation.c2}"
                 app:layout_constraintEnd_toStartOf="@+id/button_d2"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_c3"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/button_c3" />
 
             <Button
                 android:id="@+id/button_c3"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="C3"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.C3)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.C3)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.C3) ? `C3` : activity.viewModel.currentAssociation.c3}"
                 app:layout_constraintEnd_toStartOf="@+id/button_d3"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button_c4"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/button_c4" />
 
             <Button
                 android:id="@+id/button_c4"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:text="C4"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.C4)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.C4)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.C4) ? `C4` : activity.viewModel.currentAssociation.c4}"
                 app:layout_constraintEnd_toStartOf="@+id/button_d4"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/solution_c"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/solution_c" />
 
             <Button
                 android:id="@+id/button_d1"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
-                android:text="D1"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.D1)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.D1)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.D1) ? `D1` : activity.viewModel.currentAssociation.d1}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/button_c1"
-                app:layout_constraintTop_toBottomOf="@+id/button_d2"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/button_d2" />
 
             <Button
                 android:id="@+id/button_d2"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:text="D2"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.D2)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.D2)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.D2) ? `D2` : activity.viewModel.currentAssociation.d2}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/button_c2"
-                app:layout_constraintTop_toBottomOf="@+id/button_d3"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/button_d3" />
 
             <Button
                 android:id="@+id/button_d3"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:text="D3"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.D3)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.D3)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.D3) ? `D3` : activity.viewModel.currentAssociation.d3}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/button_c3"
-                app:layout_constraintTop_toBottomOf="@+id/button_d4"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/button_d4" />
 
             <Button
                 android:id="@+id/button_d4"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="D4"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.D4)}"
+                android:onClick="@{() -> activity.viewModel.openCell(Cell.D4)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.D4) ? `D4` : activity.viewModel.currentAssociation.d4}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/button_c4"
-                app:layout_constraintTop_toBottomOf="@+id/solution_d"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/solution_d" />
 
             <Button
                 android:id="@+id/solution_a"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginBottom="8dp"
-                android:text="A"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.A)}"
+                android:onClick="@{() -> activity.tryAnswer(Cell.A)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.A) ? `A` : activity.viewModel.currentAssociation.solutionsA[0]}"
                 app:layout_constraintBottom_toTopOf="@+id/solution"
                 app:layout_constraintEnd_toStartOf="@+id/solution_b"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <Button
                 android:id="@+id/solution_b"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginBottom="8dp"
-                android:text="B"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.B)}"
+                android:onClick="@{() -> activity.tryAnswer(Cell.B)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.B) ? `B` : activity.viewModel.currentAssociation.solutionsB[0]}"
                 app:layout_constraintBottom_toTopOf="@+id/solution"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/solution_a"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintStart_toEndOf="@+id/solution_a" />
 
             <Button
                 android:id="@+id/solution_c"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginTop="8dp"
-                android:text="C"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.C)}"
+                android:onClick="@{() -> activity.tryAnswer(Cell.C)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.C) ? `C` : activity.viewModel.currentAssociation.solutionsC[0]}"
                 app:layout_constraintEnd_toStartOf="@+id/solution_d"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/solution"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/solution" />
 
             <Button
                 android:id="@+id/solution_d"
                 style="@style/ButtonStyle.CellPortrait"
                 android:layout_marginTop="8dp"
-                android:text="D"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.D)}"
+                android:onClick="@{() -> activity.tryAnswer(Cell.D)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.D) ? `D` : activity.viewModel.currentAssociation.solutionsD[0]}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/solution_c"
-                app:layout_constraintTop_toBottomOf="@+id/solution"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toBottomOf="@+id/solution" />
 
             <Button
                 android:id="@+id/solution"
                 style="@style/ButtonStyle.CellPortrait"
-                android:text="\???"
+                android:enabled="@{activity.viewModel.closedCells.get(Cell.F)}"
+                android:onClick="@{() -> activity.tryAnswer(Cell.F)}"
+                android:text="@{activity.viewModel.closedCells.get(Cell.F) ? `???` : activity.viewModel.currentAssociation.solutions[0]}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="HardcodedText" />
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

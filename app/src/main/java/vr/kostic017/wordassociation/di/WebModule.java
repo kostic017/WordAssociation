@@ -19,7 +19,7 @@ public class WebModule {
     @Singleton
     static Retrofit provideRetrofit(Properties properties) {
         return new Retrofit.Builder()
-                .baseUrl(properties.getProperty(Config.API_BASE_URL))
+                .baseUrl(properties.getProperty(Config.Keys.API_BASE_URL))
                 .addConverterFactory(JacksonConverterFactory.create())
                 .addConverterFactory(LanguageConverterFactory.create())
                 .build();

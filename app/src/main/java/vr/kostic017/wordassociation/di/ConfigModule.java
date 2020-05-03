@@ -28,7 +28,7 @@ public class ConfigModule {
     Properties provideProperties() {
         Properties properties = new Properties();
         try {
-            InputStream inputStream = assetManager.open(Config.CONFIG_FILE_NAME);
+            InputStream inputStream = assetManager.open(Config.FILE_NAME);
             properties.load(inputStream);
         } catch (IOException e) {
             Log.e(TAG, "Could not read properties.", e);

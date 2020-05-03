@@ -75,7 +75,6 @@ public class PlayActivity extends AppCompatActivity {
                         Toast.makeText(PlayActivity.this, R.string.wrong_answer, Toast.LENGTH_SHORT).show();
                     }
                 })
-                .setNegativeButton(android.R.string.no, null)
                 .create();
 
         input.setOnFocusChangeListener((v, hasFocus) -> {
